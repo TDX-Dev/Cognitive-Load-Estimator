@@ -24,40 +24,32 @@ def predict(features_dict):
 
 
 def analyze_text(text):
-    """
-    Splits text into sentences,
-    extracts features per sentence,
-    adds BERT surprisal,
-    predicts difficulty per sentence.
-    Returns list of scores.
-    """
     doc = nlp(text)
-    scores = []
+
+    results = []
 
     for sent in doc.sents:
         sentence_text = sent.text.strip()
-
         if not sentence_text:
             continue
 
-        # 1️⃣ Extract Person A features
         feats = extract_features(sentence_text)
-
-        # 2️⃣ Add BERT surprisal
         surprisal = sentence_surprisal(sentence_text)
         feats["surprisal"] = surprisal
 
-        # 3️⃣ Ensure all expected features exist
-        # (important for safety)
         for col in feature_names:
             if col not in feats:
                 feats[col] = 0
 
-        # 4️⃣ Predict
         score = predict(feats)
-        scores.append(score)
 
-    return scores
+        results.append({
+            "sentence": sentence_text,
+            "score": score
+        })
+
+    return results
+
 
 
 if __name__ == "__main__":
@@ -68,9 +60,13 @@ if __name__ == "__main__":
 
     results = analyze_text(sample_text)
 
-    print("Sentence difficulty scores:")
-    print(results)
+    from visualization.heatmap import generate_text_heatmap
 
-    from visualization.heatmap import plot_heatmap
-    plot_heatmap(results)
+    html = generate_text_heatmap(results)
+
+    with open("heatmap_output.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+    print("Heatmap saved to heatmap_output.html")
+
 
