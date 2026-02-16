@@ -22,6 +22,8 @@ models/*.bin
 # Generated data
 #data/features.csv
 
+models/difficulty.pkl
+
 # Large raw datasets (optional if private)
 #data/onestopenglish/
 
