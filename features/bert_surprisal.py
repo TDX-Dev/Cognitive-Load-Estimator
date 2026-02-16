@@ -7,7 +7,13 @@ model = AutoModelForMaskedLM.from_pretrained("bert-base-uncased")
 
 
 def sentence_surprisal(text):
-    inputs = tokenizer(text, return_tensors="pt")
+    inputs = tokenizer(
+        text,
+        return_tensors="pt",
+        truncation=True,
+        max_length=512
+    )
+
 
     with torch.no_grad():
         outputs = model(**inputs)

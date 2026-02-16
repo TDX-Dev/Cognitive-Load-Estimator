@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+.nlp_sem6/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model files
+models/*.pkl
+models/*.pt
+models/*.bin
+
+# Generated data
+#data/features.csv
+
+# Large raw datasets (optional if private)
+#data/onestopenglish/
+
+# Output files
+heatmap_output.html
+
+# Logs
+*.log
+
+# VSCode
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -41,7 +41,7 @@ def analyze_text(text):
             if col not in feats:
                 feats[col] = 0
 
-        score = predict(feats)
+        score = float(predict(feats))
 
         results.append({
             "sentence": sentence_text,
