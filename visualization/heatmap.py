@@ -57,7 +57,7 @@ def generate_text_heatmap(results):
 
     html += f"""
     <hr>
-    <h3>Overall Cognitive Load Score: {final_score} / 10</h3>
+    <h3 style="color:white">Overall Cognitive Load Score: {final_score} / 10</h3>
     """
 
     return html

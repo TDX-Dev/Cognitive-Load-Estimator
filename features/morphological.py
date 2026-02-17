@@ -25,6 +25,12 @@ def avg_sentence_length(doc):
     words = [t for t in doc if t.is_alpha]
     return len(words)
 
+def avg_word_length(doc):
+    words = [t.text for t in doc if t.is_alpha]
+    if not words:
+        return 0
+    return sum(len(w) for w in words) / len(words)
+
 if __name__ == "__main__":
     sample = (
         "Students learn quickly. "

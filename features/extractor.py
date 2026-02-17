@@ -2,7 +2,7 @@
 feature_extractor
 """
 
-from features.morphological import lexical_density, avg_sentence_length, type_token_ratio
+from features.morphological import lexical_density, avg_sentence_length, type_token_ratio, avg_word_length
 from features.syntax import average_dependency_distance, avg_tree_depth, clause_count
 from features.semantic import polysemy_score
 
@@ -10,6 +10,7 @@ def extract_features(doc):
     return {
         "lexical_density": lexical_density(doc),
         "sentence_length": avg_sentence_length(doc),
+        "avg_word_length": avg_word_length(doc),
         "type_token_ratio": type_token_ratio(doc),
         "dep_distance": average_dependency_distance(doc),
         "tree_depth": avg_tree_depth(doc),
