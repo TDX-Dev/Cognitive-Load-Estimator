@@ -41,5 +41,3 @@ if __name__ == "__main__":
 
     print("Easy depth:", avg_tree_depth(easy))
     print("Hard depth:", avg_tree_depth(hard))
-
-# comment for testing

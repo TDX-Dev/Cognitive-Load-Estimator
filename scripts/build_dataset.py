@@ -4,9 +4,9 @@ import spacy
 from tqdm import tqdm
 
 from features.extractor import extract_features
-# from features.bert_surprisal import sentence_surprisal  # keep disabled for now
+# from features.bert_surprisal import sentence_surprisal
 
-# Disable NER for speed
+# NER currently disabled for speed
 nlp = spacy.load("en_core_web_sm", disable=["ner"])
 
 DATA_FOLDER = "data/onestopenglish"
@@ -25,7 +25,6 @@ for filename in tqdm(files, desc="Processing files"):
 
     path = os.path.join(DATA_FOLDER, filename)
 
-    # Handle Windows encoding safely
     try:
         df = pd.read_csv(path, encoding="utf-8")
     except UnicodeDecodeError:
@@ -43,7 +42,7 @@ for filename in tqdm(files, desc="Processing files"):
             if pd.isna(text):
                 continue
 
-            # Parse ONCE
+            # parse once
             doc = nlp(str(text))
 
             for sent in doc.sents:
@@ -51,7 +50,6 @@ for filename in tqdm(files, desc="Processing files"):
                 if len(sent) < 3:
                     continue
 
-                # Pass spaCy sentence directly
                 feats = extract_features(sent)
 
                 rows.append({

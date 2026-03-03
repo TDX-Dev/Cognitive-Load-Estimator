@@ -7,13 +7,7 @@ nlp = spacy.load("en_core_web_sm", disable=["ner"])
 
 
 def analyze_text(text):
-    """
-    Returns list of:
-    {
-        "sentence": str,
-        "score": float (0–10 normalized)
-    }
-    """
+    
     results = []
 
     sentence_scores = score_text(text)

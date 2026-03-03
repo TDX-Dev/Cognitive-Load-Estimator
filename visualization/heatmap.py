@@ -62,3 +62,34 @@ def generate_text_heatmap(results):
 
     return html
 
+def generate_timeline_heatmap(results, total_duration):
+
+    html = """
+    <div style="
+        width:100%;
+        height:30px;
+        display:flex;
+        border-radius:6px;
+        overflow:hidden;
+    ">
+    """
+
+    for item in results:
+        start = item["start"]
+        end = item["end"]
+        score = item["score"]
+
+        width_percent = ((end - start) / total_duration) * 100
+
+        color = score_to_color(score)
+
+        html += f"""
+        <div style="
+            width:{width_percent}%;
+            background:{color};
+        "></div>
+        """
+
+    html += "</div>"
+
+    return html

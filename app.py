@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🧠 Cognitive Load Heatmap")
+st.title("Cognitive Load Heatmap")
 
 mode = st.sidebar.radio(
     "Select Mode",

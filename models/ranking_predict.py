@@ -4,10 +4,10 @@ import joblib
 import spacy
 from features.extractor import extract_features
 
-# Load spaCy
+# load spaCy
 nlp = spacy.load("en_core_web_sm", disable=["ner"])
 
-# Load saved model bundle
+# load saved model bundle
 bundle = torch.load("models/ranking_model.pt")
 
 min_score = bundle["min_score"]
@@ -15,7 +15,7 @@ max_score = bundle["max_score"]
 
 scaler = joblib.load("models/ranking_scaler.pkl")
 
-# Define model architecture
+# define model architecture
 class RankModel(nn.Module):
     def __init__(self, input_dim):
         super().__init__()
@@ -30,7 +30,7 @@ class RankModel(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-# Initialize model
+# initialize model
 input_dim = scaler.mean_.shape[0]
 model = RankModel(input_dim)
 model.load_state_dict(bundle["model_state"])
@@ -46,7 +46,6 @@ def score_sentence(sentence):
     with torch.no_grad():
         raw_score = model(tensor).item()
 
-    # Normalize to 0–10
     normalized = 10 * (raw_score - min_score) / (max_score - min_score)
 
     return max(0, min(10, normalized))

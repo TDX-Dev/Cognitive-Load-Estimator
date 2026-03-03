@@ -4,7 +4,7 @@ import spacy
 from tqdm import tqdm
 from features.extractor import extract_features
 
-# Disable NER for speed
+
 nlp = spacy.load("en_core_web_sm", disable=["ner"])
 
 DATA_FOLDER = "data/onestopenglish"
@@ -17,17 +17,15 @@ for filename in tqdm(files, desc="Processing files"):
 
     path = os.path.join(DATA_FOLDER, filename)
 
-    # Safe encoding handling
     try:
         df = pd.read_csv(path, encoding="utf-8")
     except UnicodeDecodeError:
         df = pd.read_csv(path, encoding="cp1252")
 
-    # Ensure required columns exist
+    # checking if required columns exist
     if not all(col in df.columns for col in ["Elementary", "Intermediate", "Advanced"]):
         continue
 
-    # Row-level progress bar (like your previous version)
     for _, row in tqdm(df.iterrows(), total=len(df),
                        desc=f"Rows in {filename}",
                        leave=False):
@@ -47,7 +45,7 @@ for filename in tqdm(files, desc="Processing files"):
 
         min_len = min(len(E_sents), len(I_sents), len(A_sents))
 
-        # Sentence alignment progress (optional but useful)
+        # Sentence alignment progress
         for i in range(min_len):
 
             E_feat = extract_features(E_sents[i])

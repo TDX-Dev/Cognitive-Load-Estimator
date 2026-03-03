@@ -1,4 +1,6 @@
 import streamlit as st
+from scripts.youtube_pipeline import analyze_video
+from visualization.heatmap import generate_text_heatmap, generate_timeline_heatmap
 
 def render_youtube_ui():
 
@@ -12,10 +14,23 @@ def render_youtube_ui():
             st.warning("Enter a YouTube URL")
             return
 
-        st.info("Transcript + timeline analysis will appear here.")
+        with st.spinner("Analyzing video transcript..."):
 
-        # Future:
-        # 1. Extract transcript with timestamps
-        # 2. Chunk by time windows
-        # 3. Run analyze_text on each chunk
-        # 4. Plot timeline heatmap
+            results = analyze_video(video_url)
+
+            if not results:
+                st.error("No transcript available.")
+                return
+
+            total_duration = max(r["end"] for r in results)
+
+            timeline_html = generate_timeline_heatmap(results, total_duration)
+            transcript_html = generate_text_heatmap(results)
+
+        st.video(video_url)
+
+        st.markdown("### Timeline Cognitive Load")
+        st.components.v1.html(timeline_html, height=60)
+
+        st.markdown("### Transcript Heatmap")
+        st.components.v1.html(transcript_html, height=500, scrolling=True)
