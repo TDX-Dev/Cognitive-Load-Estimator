@@ -110,6 +110,3 @@ The ranking model is generally more stable for relative cognitive load compariso
 
 ---
 
-## Installation
-
-### 1. Clone the Repository
