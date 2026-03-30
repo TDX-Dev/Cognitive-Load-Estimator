@@ -7,7 +7,6 @@ from sklearn.metrics import r2_score
 print("Loading dataset...")
 df = pd.read_csv("data/features.csv")
 
-# ---- Prepare features ----
 X = df.drop(["text", "difficulty"], axis=1)
 y = df["difficulty"]
 
@@ -27,13 +26,11 @@ model = RandomForestRegressor(
 
 model.fit(X_train, y_train)
 
-# ---- Evaluate ----
 y_pred = model.predict(X_test)
 r2 = r2_score(y_test, y_pred)
 
 print(f"Model R² Score: {r2:.4f}")
 
-# ---- Save Model ----
 joblib.dump({
     "model": model,
     "feature_names": feature_names

@@ -1,6 +1,6 @@
 import streamlit as st
 from scripts.youtube_pipeline import analyze_video
-from visualization.heatmap import generate_text_heatmap, generate_timeline_heatmap
+from visualization.heatmap1 import generate_text_heatmap, generate_timeline_heatmap
 
 def render_youtube_ui():
 

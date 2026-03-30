@@ -1,6 +1,6 @@
 import spacy
 from models.ranking_predict import score_text
-from visualization.heatmap import generate_text_heatmap
+from visualization.heatmap1 import generate_text_heatmap
 
 # Load spaCy once
 nlp = spacy.load("en_core_web_sm", disable=["ner"])

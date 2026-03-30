@@ -1,6 +1,6 @@
 import streamlit as st
 from scripts.pipeline import analyze_text
-from visualization.heatmap import generate_text_heatmap
+from visualization.heatmap1 import generate_text_heatmap
 
 def render_text_ui():
 
