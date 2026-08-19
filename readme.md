@@ -17,7 +17,7 @@ Built with:
 - HuggingFace Transformers
 - Streamlit
 
----
+
 
 ## Overview
 
@@ -32,7 +32,7 @@ This project moves beyond traditional readability metrics by modeling structural
 
 The system is trained on aligned Elementary, Intermediate, and Advanced texts from the OneStopEnglish corpus.
 
----
+
 
 ## Features
 
@@ -60,7 +60,7 @@ Each sentence is scored from 0 to 10 using:
 Instead of predicting absolute difficulty only, the ranking model learns ordered relationships:
 
 
----
+
 
 ## How It Works
 
@@ -85,7 +85,7 @@ Semantic:
 Optional:
 - BERT-based surprisal score
 
----
+
 
 ## Model Types
 
@@ -108,5 +108,5 @@ Files:
 
 The ranking model is generally more stable for relative cognitive load comparisons.
 
----
+
 
